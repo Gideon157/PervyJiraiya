@@ -10,6 +10,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname));
 
 // SOLO assets pubblici
 app.use("/assets", express.static("assets"));

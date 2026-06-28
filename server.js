@@ -7,6 +7,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
+const DOMAIN = process.env.DOMAIN_URL;
 
 app.use(cors());
 app.use(express.json());
@@ -43,10 +44,10 @@ app.post("/create-checkout-session", async (req, res) => {
      
 
       success_url:
-        "http://localhost:5500/success.html?session_id={CHECKOUT_SESSION_ID}",
+       `${DOMAIN}/success.html?session_id={CHECKOUT_SESSION_ID}`,
 
       cancel_url:
-        "http://localhost:5500/index.html",
+       `${DOMAIN}/index.html`,
     });
 
     res.json({ url: session.url });
@@ -196,10 +197,10 @@ app.post("/create-subscription-checkout", async (req, res) => {
       ],
 
       success_url:
-        "http://localhost:5500/sub-success.html?plan=" + plan,
+        `${DOMAIN}/sub-success.html?plan=${plan}`,
 
       cancel_url:
-        "http://localhost:5500/subscription.html"
+        `${DOMAIN}/subscription.html`,
 
     });
 

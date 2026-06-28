@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <nav class="navbar">
+  <div class="nav-container">
+
+    <div class="nav-left">
+      <img src="assets/PervyJiraya.png" class="nav-logo">
+      <span class="brand">PervyJiraya</span>
+    </div>
+
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="myvideos.html">My Videos</a>
+      <a href="#">Login</a>
+    </div>
+
+  </div>
+</nav>
+  <header>
+    <h1>Benvenuto nel Video Store</h1>
+  </header>
+  <main>
+    <div class="video-grid">
+      <div class="video-card">
+        <img src="assets/thumb1.jpg.png" alt="Copertina Video 1">
+        <h2>Video 1</h2>
+        <p>Anteprima gratuita disponibile</p>
+       <button onclick="goToVideo(1)">Watch Preview</button>
+      </div>
+      <div class="video-card">
+        <img src="assets/thumb2.jpg" alt="Copertina Video 2">
+        <h2>Video 2</h2>
+        <p>Anteprima gratuita disponibile</p>
+        <button onclick="buyVideo(2)">Compra (€5)</button></div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Video Store</p>
+  </footer>
+   <script>
+  function buyVideo(id) {
+   
+
+    // Vai alla pagina video
+    window.location.href = "video.html?id=" + id;
+
+  }
+  
+function goToVideo(id) {
+  window.location.href = "video.html?id=" + id;
+}
+
+  </script>
+  
+</body>
+</html>

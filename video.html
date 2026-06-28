@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Preview</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  
+
+  <!-- NAVBAR -->
+ <nav class="navbar">
+
+  <div class="nav-container">
+
+    <div class="nav-left">
+      <img src="assets/PervyJiraiya3.png" class="nav-logo">
+      <span class="brand">PervyJiraiya</span>
+    </div>
+
+    <div class="nav-right">
+      <a href="index.html" class="active">Home</a>
+       <a href="myvideos.html">My Videos</a>
+      <a href="subscription.html">Subscription</a>
+      <a href="contacts.html">Contacts</a>
+    </div>
+
+  </div>
+
+</nav>
+
+  <!-- PAGE -->
+  <main class="video-page">
+
+  <!-- VIDEO -->
+  <div class="video-container">
+    <video
+      id="video-player"
+      controls
+      controlsList="nodownload"
+      disablePictureInPicture
+    >
+      Il tuo browser non supporta il video HTML5.
+    </video>
+  </div>
+
+  <!-- 3 CARDS -->
+  <section class="info-section">
+
+    <!-- PREMIUM ACCESS -->
+    <div class="info-card">
+
+      <div class="card-icon">🔒</div>
+
+      <h2>Premium Access</h2>
+
+      <p id="video-message">
+        Unlock the full HD video instantly after purchase
+      </p>
+
+      <div id="buy-container"></div>
+
+      <a
+        href="index.html"
+        class="back-btn"
+      >
+        ← Back
+      </a>
+
+    </div>
+
+    <!-- INFO PRODUCT -->
+    <div class="info-card">
+
+    <div class="card-icon">
+        <i class="fa-solid fa-circle-info"></i>
+    </div>
+
+    <h2>Info Product</h2>
+
+    <div class="product-row">
+    <span>
+        <i class="fa-regular fa-clock"></i>
+        Length
+    </span>
+
+    <span id="video-length" class="value-red"></span>
+</div>
+
+<div class="product-row">
+    <span>
+        <i class="fa-regular fa-file"></i>
+        Size
+    </span>
+
+    <span id="video-size" class="value-red"></span>
+</div>
+
+<div class="product-row">
+    <span>
+        <i class="fa-regular fa-hard-drive"></i>
+        Quality
+    </span>
+
+    <span id="video-quality" class="value-red"></span>
+</div>
+    
+
+</div>
+
+
+    </div>
+
+    <!-- WHAT YOU GET -->
+    <div class="info-card">
+
+      <div class="card-icon">
+        <i class="fa-solid fa-shield-halved"></i> 
+      </div>
+
+      <h2>What You Get</h2>
+
+      <ul class="benefits-list">
+          <li><i class="fa-solid fa-check"></i> Full video</li>
+
+        <li><i class="fa-solid fa-check"></i> HD video quality</li>
+
+        <li><i class="fa-solid fa-check"></i> Instant access</li>
+        
+        <li><i class="fa-solid fa-check"></i> Instant download</li>
+
+        <li><i class="fa-solid fa-check"></i> Unlimited rewatch</li>
+
+        <li><i class="fa-solid fa-check"></i> Secure payment</li>
+
+    </ul>
+
+    <div class="payment-icons">
+
+        <i class="fa-brands fa-cc-visa"></i>
+
+        <i class="fa-brands fa-cc-mastercard"></i>
+
+        <i class="fa-brands fa-cc-apple-pay"></i>
+
+        <span class="secure-label">
+            <i class="fa-solid fa-lock"></i>
+            Secure
+        </span>
+
+    </div>
+
+  </section>
+
+  <div class="video-footer">
+    © 2025 PervyJiraya
+  </div>
+
+</main>
+
+<script>
+const player = document.getElementById("video-player");
+const message = document.getElementById("video-message");
+const buyContainer = document.getElementById("buy-container");
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const videoInfo = {
+
+  1: { duration: "4:32", size: "394 MB", quality: "HD 1080p" },
+  2: { duration: "04:19", size: "2.17 GB", quality: "HD 1080p" },
+  3: { duration: "01:02", size: "196 MB", quality: "HD 720p" },
+  4: { duration: "01:52", size: "152 MB", quality: "HD 1080p" },
+  5: { duration: "09:24", size: "1.00 GB", quality: "HD 1080p" },
+   6: { duration: "2:29", size: "669 MB", quality: "HD 1080p" },
+  7: { duration: "02:24", size: "163 MB", quality: "HD 1080p" },
+  8: { duration: "03:12", size: "53.08 MB", quality: "HD 1080p" },
+  9: { duration: "02:03", size: "361 MB", quality: "HD 1080p" },
+  10: { duration: "05:23", size: "2.50 GB", quality: "HD 1080p" }, 
+  11: { duration: "02:21", size: "34.02 MB", quality: "HD 1080p" },
+  12: { duration: "11:32", size: "2.63 GB", quality: "HD 1080p" },
+  13: { duration: "05:85", size: "313 MB", quality: "HD 1080p" },
+  14: { duration: "03:42", size: "953 MB", quality: "HD 1080p" }, 
+  15: { duration: "03:24", size: "1:69 GB", quality: "HD 1080p" },
+  16: { duration: "07:08", size: "353 MB", quality: "HD 720p" },
+  17: { duration: "02:03", size: "809 MB", quality: "HD 1080p" },
+  18: { duration: "01:55", size: "756 MB", quality: "HD 1080p" },
+  19: { duration: "4:19", size: "704 MB", quality: "HD 1080p" },
+  20: { duration: "00:44", size: "119 MB", quality: "HD 1080p" },
+   21: { duration: "3:33", size: "1.30", quality: "HD 1080p" },
+};
+const info = videoInfo[id];
+
+if (info) {
+
+  document.getElementById("video-length").textContent =
+    info.duration;
+
+  document.getElementById("video-size").textContent =
+    info.size;
+
+  document.getElementById("video-quality").textContent =
+    info.quality;
+
+}
+
+/* controllo pagamento */
+const isPaid = localStorage.getItem("video_" + id);
+const subscriptionExpire =
+localStorage.getItem(
+  "subscription_expire"
+);
+
+const hasSubscription =
+  subscriptionExpire &&
+  Date.now() < Number(subscriptionExpire);
+
+/* =========================
+   NON PAGATO -> PREVIEW
+========================= */
+if (!isPaid && !hasSubscription) {
+
+  if (id === "1") {
+    player.src = "assets/preview1.mp4";
+  }
+  else if (id === "2") {
+    player.src = "assets/preview2.mp4";
+  }
+   if (id === "3") {
+    player.src = "assets/preview3.mp4";
+  }
+   if (id === "4") {
+    player.src = "assets/preview4.mp4";
+  }
+  if (id === "5") {
+    player.src = "assets/preview5.mp4";
+  }
+    if (id === "6") {
+    player.src = "assets/preview6.mp4";
+  }
+    if (id === "7") {
+    player.src = "assets/preview7.mp4";
+  }
+    if (id === "8") {
+    player.src = "assets/preview8.mp4";
+  }
+    if (id === "9") {
+    player.src = "assets/preview9.mp4";
+  }
+    if (id === "10") {
+    player.src = "assets/preview10.mp4";
+  }
+    if (id === "11") {
+    player.src = "assets/preview11.mp4";
+  }
+    if (id === "12") {
+    player.src = "assets/preview12.mp4";
+  }
+    if (id === "13") {
+    player.src = "assets/preview13.mp4";
+  }
+    if (id === "14") {
+    player.src = "assets/preview14.mp4";
+  }
+    if (id === "15") {
+    player.src = "assets/preview15.mp4";
+  
+   }
+    if (id === "16") {
+    player.src = "assets/preview16.mp4";
+  }
+     if (id === "17") {
+    player.src = "assets/preview17.mp4";
+  }
+     if (id === "18") {
+    player.src = "assets/preview18.mp4";
+  }
+     if (id === "19") {
+    player.src = "assets/preview19.mp4";
+  }
+     if (id === "20") {
+    player.src = "assets/preview20.mp4";
+  }
+     if (id === "21") {
+    player.src = "assets/preview21.mp4";
+  }
+  else {
+    message.innerHTML = "Unlock the full HD video instantly after purchase";
+  }
+
+  buyContainer.innerHTML = `
+    <div class="video-buttons">
+      <button
+        class="buy-btn"
+        onclick="buyVideo(${id})"
+      >
+        🔓 Unlock Full Video 
+      </button>
+    </div>
+  `;
+}
+
+/* =========================
+ /* =========================
+   PAGATO O ABBONATO
+========================= */
+else {
+
+  /* UTENTE ABBONATO */
+  if (hasSubscription) {
+
+    player.src =
+  "http://localhost:3000/subscription-video?id=" + id;
+
+    message.innerHTML =
+      "<span class='purchased'>👑 Premium Membership active. Full access to all content.</span>";
+
+    buyContainer.innerHTML = `
+  <div class="video-buttons">
+
+    <a
+      href="http://localhost:3000/subscription-video?id=${id}"
+      download
+    >
+      <button class="buy-btn">
+        ⬇ Download Video
+      </button>
+    </a>
+
+  </div>
+`;
+
+  }
+
+  /* ACQUISTO SINGOLO */
+  else {
+
+    const sessionId =
+  localStorage.getItem(
+    "session_" + id
+  );
+
+    if (!sessionId) {
+
+      alert("Session not found. Please buy again.");
+
+      localStorage.removeItem("video_" + id);
+
+      window.location.href = "index.html";
+    }
+
+    else {
+
+      player.src =
+        "http://localhost:3000/secure-video?session_id=" +
+        sessionId;
+
+      message.innerHTML =
+        "<span class='purchased'> ✅ Video purchased successfully. Full video unlocked.</span>";
+
+      buyContainer.innerHTML = `
+        <div class="video-buttons">
+          <a href="http://localhost:3000/secure-video?session_id=${sessionId}" download>
+            <button class="buy-btn">
+              ⬇ Download Video
+            </button>
+          </a>
+        </div>
+      `;
+    }
+  }
+}
+
+player.load();
+
+/* =========================
+   STRIPE CHECKOUT
+========================= */
+async function buyVideo(id) {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/create-checkout-session",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          videoId: id
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Errore creazione checkout");
+    }
+
+  } catch (err) {
+    console.error(err);
+    alert("Errore server");
+  }
+}
+
+/* blocca click destro */
+document.addEventListener(
+  "contextmenu",
+  e => e.preventDefault()
+);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Subscription Activated</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div style="
+max-width:700px;
+margin:100px auto;
+text-align:center;
+color:white;
+">
+
+<h1>✅ Subscription Activated</h1>
+
+<p>
+Thank you for your purchase.
+Your subscription is now active.
+</p>
+
+<a href="index.html">
+
+<button>
+Return Home
+</button>
+
+</a>
+
+</div>
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const plan = params.get("plan");
+
+let expireDate;
+
+if(plan === "monthly"){
+
+    expireDate =
+      Date.now() + (30 * 24 * 60 * 60 * 1000);
+
+}
+
+else if(plan === "quarterly"){
+
+    expireDate =
+      Date.now() + (90 * 24 * 60 * 60 * 1000);
+
+}
+
+else if(plan === "sixmonths"){
+
+    expireDate =
+      Date.now() + (180 * 24 * 60 * 60 * 1000);
+
+}
+
+localStorage.setItem(
+  "subscription_plan",
+  plan
+);
+
+localStorage.setItem(
+  "subscription_expire",
+  expireDate
+);
+
+</script>
+
+</body>
+
+</html>

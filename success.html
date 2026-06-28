@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Checking Payment</title>
+</head>
+<body>
+
+<h1>Checking payment...</h1>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const sessionId = params.get("session_id");
+
+fetch(`http://localhost:3000/verify-session?session_id=${sessionId}`)
+  .then(res => res.json())
+  .then(data => {
+
+    if (data.success) {
+
+      // salva acquisto video
+      localStorage.setItem(
+        "video_" + data.videoId,
+        "paid"
+      );
+
+      // salva sessione Stripe
+      localStorage.setItem(
+  "session_" + data.videoId,
+  sessionId
+);
+
+      // reindirizza al video
+      window.location.href =
+        "video.html?id=" + data.videoId;
+
+    } else {
+      alert("Payment not valid");
+      window.location.href = "index.html";
+    }
+
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Errore verifica pagamento");
+    window.location.href = "index.html";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Subscription</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/PervyJiraiya3.png">
+
+
+</head>
+
+<body>
+   <nav class="navbar">
+
+  <div class="nav-container">
+
+    <div class="nav-left">
+      <img src="assets/PervyJiraiya3.png" class="nav-logo">
+      <span class="brand">PervyJiraiya</span>
+    </div>
+
+    <div class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="myvideos.html"> My Videos</a>
+      <a href="subscription.html" class="active">Subscription</a>
+      <a href="contacts.html">Contacts</a>
+    </div>
+
+  </div>
+
+</nav>
+
+
+   <section class="pricing-section">
+
+    <div class="pricing-header">
+
+        <div class="pricing-icon">
+            <i class="fa-solid fa-crown"></i>
+        </div>
+
+        <h1>Choose Your Plan</h1>
+
+        <p>
+            Unlock unlimited access to all videos and premium content.
+        </p>
+
+    </div>
+
+    <div class="pricing-grid">
+
+        <!-- MONTHLY -->
+
+        <div class="plan-card">
+
+            <div class="plan-icon">
+                <i class="fa-regular fa-calendar"></i>
+            </div>
+
+            <h2>Monthly</h2>
+
+            <div class="price">
+                $14.99
+                <span>/ month</span>
+            </div>
+
+            <ul>
+
+                <li>✓ Full access to all videos</li>
+                <li>✓ HD 1080p quality</li>
+                <li>✓ Instant access</li>
+                <li>✓ Cancel anytime</li>
+                <li>✓ Watch on any device</li>
+
+            </ul>
+
+          <button
+class="subscribe-btn"
+onclick="subscribe('monthly')">
+Subscribe Now
+</button>
+
+        </div>
+
+        <!-- POPULAR -->
+
+        <div class="plan-card featured">
+
+            <div class="popular-badge">
+                MOST POPULAR
+            </div>
+
+            <div class="plan-icon">
+                  <i class="fa-regular fa-calendar"></i>
+            </div>
+
+            <h2>Quarterly</h2>
+
+            <div class="price">
+                $24.99
+                <span>/ 3 months</span>
+            </div>
+
+            <div class="save">
+                Save 45%
+            </div>
+
+            <ul>
+
+                <li>✓ Full access to all videos</li>
+                <li>✓ HD 1080p quality</li>
+                <li>✓ Instant access</li>
+                <li>✓ Watch on any device</li>
+                <li>✓ Cancel anytime</li>
+
+            </ul>
+
+           <button
+class="subscribe-btn"
+onclick="subscribe('quarterly')">
+Subscribe Now
+</button>
+
+        </div>
+
+        <!-- 6 MONTHS -->
+
+        <div class="plan-card">
+
+            <div class="plan-icon">
+                   <i class="fa-regular fa-calendar"></i>
+            </div>
+
+            <h2>6 Months</h2>
+
+            <div class="price">
+                $34.99
+                <span>/ 6 months</span>
+            </div>
+
+            <div class="save">
+                Save 60%
+            </div>
+
+            <ul>
+
+               <li><span class="check">✓</span> Full access to all videos</li>
+                <li>✓ HD 1080p quality</li>
+                <li>✓ Instant access</li>
+                <li>✓ Watch on any device</li>
+                <li>✓ Cancel anytime</li>
+
+            </ul>
+
+         <button
+class="subscribe-btn"
+onclick="subscribe('sixmonths')">
+Subscribe Now
+</button>
+
+        </div>
+
+    </div>
+
+</section>
+<footer class="footer">
+    <p>
+        © 2025 PervyJiraya®
+        <br>
+        Premium Content • Secure Payments • All Rights Reserved
+    </p>
+</footer>
+<script>
+
+async function subscribe(plan){
+
+  try{
+
+    const response = await fetch(
+      "http://localhost:3000/create-subscription-checkout",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({ plan })
+      }
+    );
+
+    const data = await response.json();
+
+    if(data.url){
+      window.location.href = data.url;
+    }
+
+  }catch(err){
+
+    console.error(err);
+    alert("Stripe error");
+
+  }
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/png" href="assets/PervyJiraiya3.png">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Videos</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+  <div class="nav-container">
+
+    <div class="nav-left">
+
+      <img src="assets/PervyJiraiya3.png" class="nav-logo">
+
+      <span class="brand">
+        PervyJiraiya
+      </span>
+
+    </div>
+
+    <div class="nav-right">
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="myvideos.html" class="active">
+        My Videos
+      </a>
+
+      <a href="subscription.html">
+        Subscription
+      </a>
+
+      <a href="contacts.html">
+        Contacts
+      </a>
+
+    </div>
+
+  </div>
+
+</nav>
+
+<section class="myvideos-page">
+
+  <h1>My Videos</h1>
+  <div class="welcome-box">
+
+  <h2>
+    Welcome back!
+    <span class="username">
+      
+    </span>
+  </h2>
+
+  <p>
+    This is your private collection.
+    Keep building your premium library.
+  </p>
+
+</div>
+
+
+<div class="stats-grid">
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <i class="fa-solid fa-clapperboard"></i>
+
+    </div>
+
+    <div>
+
+      <h3>Videos Owned</h3>
+
+      <span id="videos-owned">
+        0
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <i class="fa-solid fa-crown"></i>
+
+    </div>
+
+    <div>
+
+      <h3>Premium Status</h3>
+
+      <span id="premium-status">
+
+        Inactive
+
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-icon">
+
+      <i class="fa-solid fa-download"></i>
+
+    </div>
+
+    <div>
+
+      <h3>Downloads Available</h3>
+
+      <span id="downloads-count">
+
+        0
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="progress-card">
+
+  <div class="progress-header">
+
+    <div class="stat-icon">
+
+      <i class="fa-solid fa-trophy"></i>
+
+    </div>
+
+    <div>
+
+      <h2>
+        Collection Progress
+      </h2>
+
+      <p id="progress-text">
+        You've unlocked 0% of the library.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="progress-bar">
+
+    <div
+      id="progress-fill"
+      class="progress-fill"
+    ></div>
+
+  </div>
+
+</div>
+
+  <div id="subscription-box"></div>
+
+  <div id="videos-grid" class="video-grid"></div>
+
+</section>
+
+
+
+<script>
+
+const videos = [
+
+  {
+    id: 1,
+    title: "Video 1",
+    image: "assets/thumb1.png"
+  },
+
+  {
+    id: 2,
+    title: "Video 2",
+    image: "assets/thumb2.jpg"
+  },
+    {
+    id: 3,
+    title: "Video 3",
+    image: "assets/thumb3.png"
+  }
+
+];
+
+const grid =
+document.getElementById("videos-grid");
+
+const subBox =
+document.getElementById("subscription-box");
+
+const subscriptionExpire =
+localStorage.getItem(
+  "subscription_expire"
+);
+
+const subscriptionPlan =
+localStorage.getItem(
+  "subscription_plan"
+);
+
+const hasSubscription =
+subscriptionExpire &&
+Date.now() < Number(subscriptionExpire);
+
+/* ==========================
+   SUBSCRIPTION ACTIVE
+========================== */
+
+if(hasSubscription){
+
+  const expireDate =
+  new Date(
+    Number(subscriptionExpire)
+  );
+
+  subBox.innerHTML = `
+  
+    <div class="membership-card">
+
+      <div class="membership-icon">
+        👑
+      </div>
+
+      <h2>
+        Premium Membership Active
+      </h2>
+
+      <p>
+        You have full access to all premium content.
+      </p>
+
+      <p>
+        <strong>Plan:</strong>
+        ${subscriptionPlan}
+      </p>
+
+      <p>
+        <strong>Expires:</strong>
+        ${expireDate.toLocaleDateString()}
+      </p>
+
+    </div>
+  
+  `;
+}
+
+/* ==========================
+   PURCHASED VIDEOS
+========================== */
+
+let ownedVideos = 0;
+grid.innerHTML = "";
+
+videos.forEach(video => {
+
+  const purchased =
+  localStorage.getItem(
+    "video_" + video.id
+  );
+
+  if(purchased){
+
+    ownedVideos++;
+
+    grid.innerHTML += `
+
+      <div class="video-card">
+
+        <img src="${video.image}">
+
+        <div class="video-info">
+
+          <h3>
+            ${video.title}
+          </h3>
+
+          <a
+            href="video.html?id=${video.id}"
+            class="watch-btn"
+          >
+            Watch
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+  }
+
+});
+
+
+
+/* ==========================
+   STATS
+========================== */
+
+const totalVideos = 20;
+
+document.getElementById(
+  "videos-owned"
+).textContent = ownedVideos;
+
+document.getElementById(
+  "downloads-count"
+).textContent = ownedVideos;
+
+if(hasSubscription){
+
+  const premiumElement =
+  document.getElementById(
+    "premium-status"
+  );
+
+  premiumElement.textContent =
+  "Active";
+
+  premiumElement.style.color =
+  "#00d26a";
+}
+
+const percent =
+Math.round(
+  (ownedVideos / totalVideos) * 100
+);
+
+document.getElementById(
+  "progress-text"
+).textContent =
+`You've unlocked ${percent}% of the library.`;
+
+document.getElementById(
+  "progress-fill"
+).style.width =
+percent + "%";
+
+/* ==========================
+   NO VIDEOS
+========================== */
+
+if(ownedVideos === 0){
+
+  grid.innerHTML = `
+
+    <div class="empty-library">
+
+      <i class="fa-solid fa-film"></i>
+
+      <h2>
+        No Purchased Videos
+      </h2>
+
+      <p>
+        Start building your collection.
+      </p>
+
+      <a
+        href="index.html"
+        class="watch-btn"
+      >
+        Explore Videos
+      </a>
+
+    </div>
+
+  `;
+}
+
+</script>
+<footer class="footer">
+    <p>
+        © 2025 PervyJiraya®
+        <br>
+        Premium Content • Secure Payments • All Rights Reserved
+    </p>
+</footer>
+
+</body>
+
+</html>

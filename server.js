@@ -7,7 +7,7 @@ const path = require("path");
 const fs = require("fs");
 const { generateSignedUrl } = require("./config/r2");
 
-const { HeadBucketCommand } = require("@aws-sdk/client-s3");
+
 
 const app = express();
 const DOMAIN = process.env.DOMAIN_URL;
@@ -23,6 +23,8 @@ app.use("/assets", express.static("assets"));
 /* CREA CHECKOUT */
 app.post("/create-checkout-session", async (req, res) => {
   try {
+    console.log("=== CREATE CHECKOUT ===");
+console.log("DOMAIN:", DOMAIN);
     const { videoId } = req.body;
 
     const session = await stripe.checkout.sessions.create({
@@ -55,11 +57,18 @@ app.post("/create-checkout-session", async (req, res) => {
     });
 
     res.json({ url: session.url });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: "Errore checkout" });
-  }
-});
+} catch (err) {
+
+  console.error("=== ERRORE STRIPE ===");
+  console.error(err);
+
+  res.status(500).json({
+    error: err.message,
+  });
+
+}
+  });
+
 
 /* VERIFICA SESSIONE */
 app.get("/verify-session", async (req, res) => {
@@ -250,25 +259,7 @@ app.get("/subscription-video", (req, res) => {
   res.sendFile(filePath);
 
 });
-(async () => {
-  try {
 
-    await r2.send(
-      new HeadBucketCommand({
-        Bucket: process.env.R2_BUCKET,
-      })
-    );
-
-    console.log("✅ Connessione a Cloudflare R2 riuscita!");
-    console.log("Bucket:", process.env.R2_BUCKET);
-
-  } catch (err) {
-
-    console.error("❌ Errore connessione R2");
-    console.error(err);
-
-  }
-})();
 
 const PORT = process.env.PORT || 3000;
 

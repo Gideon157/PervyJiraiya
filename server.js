@@ -5,9 +5,13 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
+const { generateSignedUrl } = require("./config/r2");
+
+const { HeadBucketCommand } = require("@aws-sdk/client-s3");
 
 const app = express();
 const DOMAIN = process.env.DOMAIN_URL;
+console.log("DOMAIN =", DOMAIN);
 
 app.use(cors());
 app.use(express.json());
@@ -97,8 +101,14 @@ app.get("/secure-video", async (req, res) => {
     }
 
     const videoId = session.metadata.videoId;
+    const signedUrl = await generateSignedUrl(
+  `full${videoId}.mp4`,
+  7200
+);
 
-    const mp4Path = path.join(
+return res.redirect(signedUrl);
+
+   /* const mp4Path = path.join(
   __dirname,
   "private_videos",
   `full${videoId}.mp4`
@@ -122,7 +132,8 @@ else {
   return res.status(404).send("Video not found");
 }
 
-res.sendFile(filePath);
+res.sendFile(filePath); 
+*/
 
 } catch (err) {
 
@@ -239,6 +250,25 @@ app.get("/subscription-video", (req, res) => {
   res.sendFile(filePath);
 
 });
+(async () => {
+  try {
+
+    await r2.send(
+      new HeadBucketCommand({
+        Bucket: process.env.R2_BUCKET,
+      })
+    );
+
+    console.log("✅ Connessione a Cloudflare R2 riuscita!");
+    console.log("Bucket:", process.env.R2_BUCKET);
+
+  } catch (err) {
+
+    console.error("❌ Errore connessione R2");
+    console.error(err);
+
+  }
+})();
 
 const PORT = process.env.PORT || 3000;
 

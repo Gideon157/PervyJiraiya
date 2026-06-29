@@ -12,7 +12,7 @@
 const params = new URLSearchParams(window.location.search);
 const sessionId = params.get("session_id");
 
-fetch(`http://localhost:3000/verify-session?session_id=${sessionId}`)
+fetch(`https://pervyjiraiya.com/verify-session?session_id=${sessionId}`)
   .then(res => res.json())
   .then(data => {
 

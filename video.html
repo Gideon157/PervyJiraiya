@@ -314,7 +314,7 @@ else {
   if (hasSubscription) {
 
     player.src =
-  "http://localhost:3000/subscription-video?id=" + id;
+  "https://pervyjiraiya.com/subscription-video?id=" + id;
 
     message.innerHTML =
       "<span class='purchased'>👑 Premium Membership active. Full access to all content.</span>";
@@ -323,7 +323,7 @@ else {
   <div class="video-buttons">
 
     <a
-      href="http://localhost:3000/subscription-video?id=${id}"
+      href="https://pervyjiraiya.com/subscription-video?id=${id}"
       download
     >
       <button class="buy-btn">
@@ -356,7 +356,7 @@ else {
     else {
 
       player.src =
-        "http://localhost:3000/secure-video?session_id=" +
+        "https://pervyjiraiya.com/secure-video?session_id=" +
         sessionId;
 
       message.innerHTML =
@@ -364,7 +364,7 @@ else {
 
       buyContainer.innerHTML = `
         <div class="video-buttons">
-          <a href="http://localhost:3000/secure-video?session_id=${sessionId}" download>
+          <a href="https://pervyjiraiya.com/secure-video?session_id=${sessionId}" download>
             <button class="buy-btn">
               ⬇ Download Video
             </button>
@@ -383,7 +383,7 @@ player.load();
 async function buyVideo(id) {
   try {
     const response = await fetch(
-      "http://localhost:3000/create-checkout-session",
+      "https://pervyjiraiya.com/create-checkout-session",
       {
         method: "POST",
         headers: {

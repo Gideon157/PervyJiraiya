@@ -395,13 +395,15 @@ async function buyVideo(id) {
       }
     );
 
-    const data = await response.json();
+const data = await response.json();
 
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Errore creazione checkout");
-    }
+console.log("RISPOSTA SERVER:", data);
+
+if (data.url) {
+  window.location.href = data.url;
+} else {
+  alert(JSON.stringify(data));
+}
 
   } catch (err) {
     console.error(err);

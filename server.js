@@ -40,7 +40,7 @@ console.log("DOMAIN:", DOMAIN);
             product_data: {
               name: `Video ${videoId}`,
             },
-            unit_amount: 999,
+            unit_amount: 10,
           },
           quantity: 1,
         },

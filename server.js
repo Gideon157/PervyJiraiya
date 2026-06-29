@@ -1,4 +1,6 @@
 require("dotenv").config();
+console.log("DOMAIN_URL =", process.env.DOMAIN_URL);
+console.log("STRIPE =", !!process.env.STRIPE_SECRET_KEY);
 const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 

@@ -44,7 +44,7 @@ console.log("DOMAIN:", DOMAIN);
             product_data: {
               name: `Video ${videoId}`,
             },
-            unit_amount: 50,
+            unit_amount: 999,
           },
           quantity: 1,
         },
@@ -123,32 +123,7 @@ app.get("/secure-video", async (req, res) => {
 
 return res.redirect(signedUrl);
 
-   /* const mp4Path = path.join(
-  __dirname,
-  "private_videos",
-  `full${videoId}.mp4`
-);
-
-const movPath = path.join(
-  __dirname,
-  "private_videos",
-  `full${videoId}.mov`
-);
-
-let filePath;
-
-if (fs.existsSync(mp4Path)) {
-  filePath = mp4Path;
-}
-else if (fs.existsSync(movPath)) {
-  filePath = movPath;
-}
-else {
-  return res.status(404).send("Video not found");
-}
-
-res.sendFile(filePath); 
-*/
+   
 
 } catch (err) {
 

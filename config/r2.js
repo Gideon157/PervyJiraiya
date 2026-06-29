@@ -1,6 +1,6 @@
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
-const { S3Client } = require("@aws-sdk/client-s3");
+
 
 const r2 = new S3Client({
   region: "auto",
